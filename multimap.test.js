@@ -75,7 +75,7 @@ describe('Special maps', () => {
   });
 
   it('reverses objects with single keys', () => {
-    map.reverse(simpleMap, el => el)
+    map.reverse(simpleMap)
     expect(map.get('1')).toBe('1');
     expect(map.get('2')).toBe('2');
     expect(map.get('3')).toBe('3');

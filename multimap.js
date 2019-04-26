@@ -53,7 +53,7 @@ class Multimap {
     });
   }
 
-  reverse(map, callback) {
+  reverse(map, callback = (el) => el) {
     Object.entries(map).forEach(kvpair => this.add(kvpair[0], ...callback(kvpair[1])));
   }
 };
