@@ -1,7 +1,10 @@
 class Multimap {
-
   constructor() {
     this.map = {};
+    this.add = this.add.bind(this);
+    this.get = this.get.bind(this);
+    this.del = this.del.bind(this);
+    this.reverse = this.reverse.bind(this);
   }
 
   add(element, ...keys) {
@@ -24,10 +27,10 @@ class Multimap {
     const sortedKeys = keys.sort((a, b) => (a < b) ? -1 : 1);
     let currentMap = this.map;
     sortedKeys.forEach((sortedKey, depth) => {
-      if (keys.length === depth + 1) {
+      if (!currentMap || !currentMap[sortedKey]) {
+        currentMap = undefined;
+      } else if (keys.length === depth + 1) {
         currentMap = currentMap[sortedKey].object;
-      } else if (!currentMap[sortedKey]) {
-        return undefined;
       } else {
         currentMap = currentMap[sortedKey].keys;
       }
@@ -48,6 +51,10 @@ class Multimap {
         currentMap = currentMap[sortedKey].keys;
       }
     });
+  }
+
+  reverse(map, callback) {
+    Object.entries(map).forEach(kvpair => this.add(kvpair[0], ...callback(kvpair[1])));
   }
 };
 
