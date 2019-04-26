@@ -50,20 +50,20 @@ describe('Special maps', () => {
   };
 
   const simpleMap = {
-    1: '1',
-    2: '2',
-    3: '3',
+    1: 'one',
+    2: 'two',
+    3: 'three',
   }
 
   const objectMap = {
     1: {
-      id: '1',
+      id: 'one',
     },
     2: {
-      id: '2',
+      id: 'two',
     },
     3: {
-      id: '3',
+      id: 'three',
     },
   }
   
@@ -76,15 +76,15 @@ describe('Special maps', () => {
 
   it('reverses objects with single keys', () => {
     map.reverse(simpleMap)
-    expect(map.get('1')).toBe('1');
-    expect(map.get('2')).toBe('2');
-    expect(map.get('3')).toBe('3');
+    expect(map.get('one')).toBe('1');
+    expect(map.get('two')).toBe('2');
+    expect(map.get('three')).toBe('3');
   });
 
   it('reverses objects with a key inside an object', () => {
     map.reverse(objectMap, el => el.id)
-    expect(map.get('1')).toBe('1');
-    expect(map.get('2')).toBe('2');
-    expect(map.get('3')).toBe('3');
+    expect(map.get('one')).toBe('1');
+    expect(map.get('two')).toBe('2');
+    expect(map.get('three')).toBe('3');
   });
 });

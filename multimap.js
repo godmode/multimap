@@ -53,8 +53,12 @@ class Multimap {
     });
   }
 
-  reverse(map, callback = (el) => el) {
-    Object.entries(map).forEach(kvpair => this.add(kvpair[0], ...callback(kvpair[1])));
+  reverse(map, callback = (el) => [el]) {
+    Object.entries(map).forEach(kvpair => {
+      let values = callback(kvpair[1]);
+      if (!Array.isArray(values)) values = [values];
+      this.add(kvpair[0], ...values)
+    });
   }
 };
 
