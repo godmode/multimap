@@ -35,6 +35,20 @@ class Multimap {
 
     return currentMap;
   }
+
+  del(...keys) {
+    const sortedKeys = keys.sort((a, b) => (a < b) ? -1 : 1);
+    let currentMap = this.map;
+    sortedKeys.forEach((sortedKey, depth) => {
+      if (keys.length === depth + 1) {
+        delete currentMap[sortedKey].object;
+      } else if (!currentMap[sortedKey]) {
+        return false;
+      } else {
+        currentMap = currentMap[sortedKey].keys;
+      }
+    });
+  }
 };
 
 module.exports = Multimap;
