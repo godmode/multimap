@@ -20,7 +20,7 @@ describe('Basics', () => {
   });
 });
 
-describe('Test Recipe', () => {
+describe('Special maps', () => {
   const map = new Multimap();
   const recipes = {
     1: [
@@ -48,11 +48,43 @@ describe('Test Recipe', () => {
       },
     ],
   };
+
+  const simpleMap = {
+    1: '1',
+    2: '2',
+    3: '3',
+  }
+
+  const objectMap = {
+    1: {
+      id: '1',
+    },
+    2: {
+      id: '2',
+    },
+    3: {
+      id: '3',
+    },
+  }
   
-  it('reverses objects to map to key', () => {
+  it('reverses objects with an array of values', () => {
     map.reverse(recipes, recipe => recipe.map(ing => ing.ingredient))
     expect(map.get('cinnamon','egg','thyme',)).toBe('1');
     expect(map.get('cinnamon','egg',)).toBe('2');
     expect(map.get('thyme','egg')).toBe(undefined);
+  });
+
+  it('reverses objects with single keys', () => {
+    map.reverse(simpleMap, el => el)
+    expect(map.get('1')).toBe('1');
+    expect(map.get('2')).toBe('2');
+    expect(map.get('3')).toBe('3');
+  });
+
+  it('reverses objects with a key inside an object', () => {
+    map.reverse(objectMap, el => el.id)
+    expect(map.get('1')).toBe('1');
+    expect(map.get('2')).toBe('2');
+    expect(map.get('3')).toBe('3');
   });
 });
