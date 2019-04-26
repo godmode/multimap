@@ -1,0 +1,16 @@
+{
+  "name": "multimap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "multimap.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "24.7.1"
+  },
+  "dependencies": {}
+}

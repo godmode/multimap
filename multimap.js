@@ -18,7 +18,9 @@ multimap.add = (element, ...keys) => {
 multimap.get = (...keys) => {
   const sortedKeys = keys.sort((a, b) => (a < b) ? -1 : 1);
   let currentMap = multimap.map;
-  sortedKeys.forEach((sortedKey, depth) => currentMap = currentMap[sortedKey]);
+  sortedKeys.forEach(sortedKey => currentMap = currentMap[sortedKey]);
 
   return currentMap;
 };
+
+module.exports = multimap;
