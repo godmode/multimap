@@ -11,17 +11,27 @@ class Multimap {
     sortedKeys.forEach((sortedKey, depth) => {
       // if we haven't added a key yet add it now otherwise we will overwrite it
       // then we update the current map to the latest depth of the key index
-      if (!currentMap[sortedKey]) currentMap[sortedKey] = (keys.length === depth + 1) ? element : new Object();
-      currentMap = currentMap[sortedKey];
+      if (!currentMap[sortedKey]) currentMap[sortedKey] = { keys: {} };
+      if (keys.length === depth + 1) {
+        currentMap[sortedKey].object = element;
+      } else {
+        currentMap = currentMap[sortedKey].keys;
+      }
     });
-
-    currentMap = element;
   };
 
   get(...keys) {
     const sortedKeys = keys.sort((a, b) => (a < b) ? -1 : 1);
     let currentMap = this.map;
-    sortedKeys.forEach(sortedKey => currentMap = currentMap[sortedKey]);
+    sortedKeys.forEach((sortedKey, depth) => {
+      if (keys.length === depth + 1) {
+        currentMap = currentMap[sortedKey].object;
+      } else if (!currentMap[sortedKey]) {
+        return undefined;
+      } else {
+        currentMap = currentMap[sortedKey].keys;
+      }
+    });
 
     return currentMap;
   }
